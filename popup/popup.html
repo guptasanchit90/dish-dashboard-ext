@@ -3,21 +3,44 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="popup.css" />
-    <title>Food Expense Tracker</title>
+    <title>Zomato Expense Tracker</title>
   </head>
   <body>
-    <div id="intro"></div>
+    <h2 id="header-title">Zomato Expense Tracker</h2>
 
-    <button id="actionButton">OK</button>
+    <div id="intro-before-login" style="display: none;">
+      <ol id="body-steps">
+        <li>Login into your Zomato Account in this Browser</li>
+        <li>Reopen this Popup</li>
+        <li>Let the Magic begin</li>
+      </ol>
+      <p id="body-message">Let’s get started by logging in your Zomato Account</p>
 
-    <div id="loader" style="display: none;">
-      <div class="spinner-border text-primary" role="status">
-        <span class="sr-only" id="loading-text">Loading...</span>
-      </div>
+      <button id="action-button-open-zomato">
+        <a href="https://www.zomato.com/login" target="_blank">Open Zomato</a>
+      </button>
     </div>
-    
 
-    <div id="data-container"></div>
+    <div id="loading" style="display: none;">
+      <p id="body-message-loading" style="margin-top: 64px;">Please wait while we check connection to your<br/>Zomato Account</p>
+      <div id="body-loading"  class="loader"></div>
+    </div>
+
+
+    <div id="intro-after-login" style="display: none;">
+      <h4 id="header-sub-title">Hello<br/>Sanchit Gupta<br/>Looks like you have 396 Orders</h4>
+
+      <ol id="body-steps-after-login">
+        <li>See Orders grouped by Year, Restaurant ...</li>
+        <li>RTotal spent on Zomato</li>
+        <li>Let’s start exploring</li>
+      </ol>
+
+      <p id="body-message-tnc" style="margin-top: 16px; font-size: 10px;">By Clicking the following button you Agree to our<br/><a href="">Terms and Conditions</a></p>
+      <button id="action-button-open-dashboard" onclick="window.location.href='https://www.zomato.com/login';">
+        Open Dashboard
+      </button>
+   </div>
 
     <script type="module" src="../foreground.js"></script>
   </body>

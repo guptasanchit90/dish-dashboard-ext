@@ -1,62 +1,61 @@
-// This is the service worker script, which executes in its own context
-// when the extension is installed or refreshed (or when you access its console).
-// It would correspond to the background script in chrome extensions v2.
-// Importing and using functionality from external files is also possible.
 import { getOrderDetails, getUserDetails } from "./service-worker-utils.js";
 
 chrome.runtime.onMessage.addListener((request, sender, reply) => {
   chrome.runtime.sendMessage({ action: "showLoader" }); // Send message to show loader
-
-  if (request.action == "getZomatoOrders") {
-    // Get First page
-    getOrderDetails(1).then(({ totalOrders }) => {
-      const totalPages = Math.ceil(totalOrders / 10);
-
-      // Get all pages
-      Promise.all(
-        Array.from(Array(totalPages).keys()).map((arr) =>
-          getOrderDetails(arr + 1, totalPages)
-        )
-      ).then((res) => {
-        if (res) {
-          let mergedData = res.map((r) => r.orderDetails).flat();
-          
-          chrome.storage.local
-            .set({
-              totalOrders: res[0].totalOrders,
-              orderDetails: mergedData,
-            })
-            .then(() => {
-              reply({ action: "showData" });
-              chrome.runtime.sendMessage({ action: "hideLoader" }); // Send message to hide loader
-            });
-        }
-      });
-    });
-  } else if (request.action == "getZomatoUserInfo") {
-    getUserDetails().then((res) => {
-      if (res) {
+  if (request.action == "getUserInfo") {
+    Promise.all([
+      getUserDetails(),
+      getOrderDetails(1).then((res) => res.totalOrders),
+    ])
+      .then((response) => {
+        console.log(response);
         chrome.storage.local
           .set({
-            userInfo: res,
+            userInfo: response[0],
+            totalOrders: response[1],
           })
           .then(() => {
-            reply({ action: "showUser" });
-            chrome.runtime.sendMessage({ action: "hideLoader" }); // Send message to hide loader
+            reply({
+              action: "showUserInfo",
+              data: {
+                userName: response[0].name,
+                totalOrders: response[1],
+              },
+            });
+            chrome.runtime.sendMessage({ action: "hideLoader" });
           });
-      }
-    });
+      })
+      .catch((error) => {
+        reply({
+          action: "noUserInfo",
+        });
+        chrome.runtime.sendMessage({ action: "hideLoader" });
+      });
   }
 
   return true;
 });
 
-chrome.runtime.onMessageExternal.addListener(function (request, sender, reply) {
+chrome.runtime.onMessageExternal.addListener(async (request, sender, reply) => {
   if (request.action == "getStoredData") {
-    chrome.storage.local
-      .get(["totalOrders", "orderDetails", "userInfo"])
-      .then((res) => {
-        reply({ data: res });
-      });
+    chrome.storage.local.get(["totalOrders", "userInfo"]).then((response) => {
+      reply(response);
+    });
+    return true;
+  }
+
+  if (request.action == "getOrders") {
+    await Promise.all(
+      Array.from(Array(request.pages).keys()).map((arr) =>
+        getOrderDetails(arr + 1, request.pages)
+      )
+    ).then((res) => {
+      if (res) {
+        let orders = res.map((r) => r.orderDetails).flat();
+        console.log(orders);
+        reply(orders);
+      }
+    });
+    return true;
   }
 });

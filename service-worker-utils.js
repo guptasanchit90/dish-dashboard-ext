@@ -16,7 +16,8 @@ export async function getOrderDetails(pageNum = 1, totalPages) {
         orderId: id,
         dishString: order.dishString,
         totalCost: order.totalCost,
-        orderDate: order.orderDate,
+        orderDate: order.orderDate.split("at")[0].trim(),
+        orderTime: order.orderDate.split("at")[1].trim(),
         resturantName: order.resInfo.name,
         resturantPhone: order.resInfo.phone.phone_string,
         deliveryAddress: order.deliveryDetails.deliveryAddress
