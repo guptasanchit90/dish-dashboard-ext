@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Zomato Expense Tracker",
-  "description": "Track and analyze your Zomato orders with ease! This extension automatically records your orders, providing a detailed breakdown of your expenses over time, helping you stay on top of your spending and make informed financial decisions.",
+  "description": "Analyze your Zomato orders with ease",
   "version": "0.0.1",
   "icons": {
     "16": "logo/logo-16.png",
@@ -24,6 +24,6 @@
     }
   ],
   "externally_connectable": {
-    "matches": ["*://*/*"]
+    "matches": ["https://food-expense.web.app/"]
   }
 }
