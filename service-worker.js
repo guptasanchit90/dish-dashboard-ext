@@ -8,7 +8,6 @@ chrome.runtime.onMessage.addListener((request, sender, reply) => {
       getOrderDetails(1).then((res) => res.totalOrders),
     ])
       .then((response) => {
-        console.log(response);
         chrome.storage.local
           .set({
             userInfo: response[0],
@@ -38,7 +37,7 @@ chrome.runtime.onMessage.addListener((request, sender, reply) => {
 
 chrome.runtime.onMessageExternal.addListener(async (request, sender, reply) => {
   if (request.action == "getStoredData") {
-    chrome.storage.local.get(["totalOrders", "userInfo"]).then((response) => {
+    chrome.storage.local.get(["totalOrders", "userInfo", "orders"]).then((response) => {
       reply(response);
     });
     return true;
@@ -52,8 +51,9 @@ chrome.runtime.onMessageExternal.addListener(async (request, sender, reply) => {
     ).then((res) => {
       if (res) {
         let orders = res.map((r) => r.orderDetails).flat();
-        console.log(orders);
-        reply(orders);
+        chrome.storage.local.set({orders: orders}).then(()=>{
+          reply(orders);
+        })
       }
     });
     return true;

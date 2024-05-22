@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "Zomato Expense Tracker",
-  "description": "Analyze your Zomato orders with ease",
+  "name": "DishDashboard",
+  "description": "Analyze your Food orders with ease",
   "version": "0.0.1",
   "icons": {
     "16": "logo/logo-16.png",
@@ -9,7 +9,7 @@
     "128": "logo/logo-128.png"
   },
   "action": {
-    "default_title": "Zomato Expense Tracker",
+    "default_title": "DishDashboard",
     "default_popup": "popup/popup.html"
   },
   "permissions": ["tabs", "scripting", "storage"],
