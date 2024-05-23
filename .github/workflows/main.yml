@@ -27,3 +27,12 @@ jobs:
         with:
           name: dish-dashboard-ext.zip
           path: dish-dashboard-ext.zip
+
+      - name: Automate GitHub Releases
+        uses: nekofar/create-github-release@v1.0.12
+        with:
+          # The tag name for the release (e.g., v1.0.0)
+          tag: v0.0.1
+          files: dish-dashboard-ext.zip
+          prerelease: true
+          
