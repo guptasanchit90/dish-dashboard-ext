@@ -13,6 +13,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Install zip
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y zip
+
       - name: Zip code
         run: |
           zip -r dish-dashboard-ext.zip . -x '*/node_modules/*' -x '*/.git/*' -x '*.log' -x '*.tmp' -x '*.yml'
