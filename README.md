@@ -7,7 +7,7 @@ Are you tired of wondering where your money goes every time you order food onlin
 
 ### What does it do?
 
-This extension records your Food orders, providing a detailed breakdown of your expenses over time. With the Food Expense Tracker, you'll be able to:
+This extension records your Food orders, providing a detailed breakdown of your expenses over time. With DishDashboard, you'll be able to:
 
 * **Track your expenses with ease**
 * **Analyze your spending habits and identify areas for improvement**
