@@ -1,0 +1,29 @@
+name: Zip Code
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  zip-code:
+    runs-on: ubuntu-latest
+    container: node:20
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install zip
+        run: |
+          apt-get update
+          apt-get install -y zip
+
+      - name: Zip code
+        run: |
+          zip -r dish-dashboard-ext.zip . -x '*/node_modules/*' -x '*/.git/*' -x '*.log' -x '*.tmp' -x '*.yml'
+
+      - name: Upload zip file
+        uses: actions/upload-artifact@v4
+        with:
+          name: dish-dashboard-ext.zip
+          path: dish-dashboard-ext.zip
