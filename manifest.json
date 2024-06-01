@@ -24,6 +24,7 @@
     }
   ],
   "externally_connectable": {
-    "matches": ["https://food-expense.web.app/"]
-  }
+    "matches": ["https://food-expense.web.app/", "*://*/*"]
+  },
+  "key":"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArOzuCRJ888qbLz5/AF8pqOF6FXQdmz62wBOqCSTu83BFZDLDc45kToGMmgnOdGifDMsNysOCMd+CAaabaITeqyOHmchjXtrpPugvC0i9HGI/Mwsi9pNg1FMoZ20hrBX8zZaVgkNDUmwKiTnV+IaCl2MC/07GzQO5tgqvYgQrUdJmxVbUlSBuo8IJN9kDW0TADNtcRZU2/dtnUqSrUcG5NYMNmj4x66KBY/zLRlShzqstzw2rkTODpMuQoyeqGS2BSc+OMRDmB9OINYbPDZoBMW3+uOFFwSbL+bSqIB4XumIaZsJW5riAaZJKSELq8wGxtWzdvfOZfdimORnKNubqcQIDAQAB"
 }

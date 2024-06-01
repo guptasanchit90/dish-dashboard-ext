@@ -10,6 +10,10 @@ if (!version) {
   }
 
 manifest.version = version;
+manifest.externally_connectable.matches = ["https://food-expense.web.app/"];
+delete (manifest.key);
+
+
 fs.writeFileSync("manifest.json", JSON.stringify(manifest, null, 2));
 console.log("Updated Version in Manifest,json successfully!");
 
