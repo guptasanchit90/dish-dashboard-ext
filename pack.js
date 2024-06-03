@@ -10,7 +10,7 @@ if (!version) {
   }
 
 manifest.version = version;
-manifest.externally_connectable.matches = ["https://food-expense.web.app/"];
+manifest.externally_connectable.matches = ["https://dish-dashboard.web.app/"];
 delete (manifest.key);
 
 

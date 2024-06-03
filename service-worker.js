@@ -44,18 +44,24 @@ chrome.runtime.onMessageExternal.addListener(async (request, sender, reply) => {
   }
 
   if (request.action == "getOrders") {
-    await Promise.all(
-      Array.from(Array(request.pages).keys()).map((arr) =>
-        getOrderDetails(arr + 1, request.pages)
-      )
-    ).then((res) => {
-      if (res) {
-        let orders = res.map((r) => r.orderDetails).flat();
-        chrome.storage.local.set({orders: orders}).then(()=>{
-          reply(orders);
+    chrome.storage.local.get("isLoading").then(({isLoading})=>{
+      if(!isLoading){
+        chrome.storage.local.set({isLoading: true}).then(async ()=>{
+          await Promise.all(
+            Array.from(Array(request.pages).keys()).map((arr) =>
+              getOrderDetails(arr + 1, request.pages)
+            )
+          ).then((res) => {
+            if (res) {
+              let orders = res.map((r) => r.orderDetails).flat();
+              chrome.storage.local.set({orders: orders, isLoading: false}).then(()=>{
+                reply(orders);
+              })
+            }
+          });
         })
       }
-    });
+    })
     return true;
   }
 });
