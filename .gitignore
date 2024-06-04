@@ -1,2 +1,2 @@
-*.zip
+out/*.zip
 *.DS_Store
