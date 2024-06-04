@@ -1,6 +1,12 @@
 # DishDashboard
 ==========================
 
+> - Access Dashboard - https://dish-dashboard.web.app/
+> - Edge extension - https://microsoftedge.microsoft.com/addons/detail/dishdashboard/ebjnmfhinflpfpnpmhnijlaehjebgmcn
+
+## Supported Platforms
+- Zomato (India)
+
 ## Track and analyze your Food orders with ease!
 
 Are you tired of wondering where your money goes every time you order food online? Do you want to take control of your expenses and make informed financial decisions? Look no further! The DishDashboard browser extension is here to help.
@@ -23,7 +29,7 @@ Download your expense data in CSV format for further analysis or use in your fav
 
 ### How to use
 
-1. Install the DishDashboard browser extension from the Chrome Web Store (or your browser's equivalent).
+1. Install the DishDashboard browser extension
 2. Click on the extension icon in your browser toolbar to open the dashboard.
 3. Follow the Steps in the popup window
 3. Start tracking your Food orders and expenses
